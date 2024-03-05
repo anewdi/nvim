@@ -34,7 +34,6 @@ return {
                 'clangd',
                 'bashls',
                 'quick_lint_js',
-                'csharp_ls',
             },
             handlers = {
                 lsp_zero.default_setup,
