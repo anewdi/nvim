@@ -33,7 +33,7 @@ local builtin = require('telescope.builtin')
 
 vim.keymap.set('n', '<leader>fg', builtin.git_files)
 vim.keymap.set('n', '<leader>fs', function()
-    builtin.grep_string({ cwd = vim.fn.expand('%:p:h:h') });
+    builtin.live_grep({ cwd = vim.fn.expand('%:p:h:h') });
 end)
 
 vim.keymap.set('n', '<leader>ff', function()
