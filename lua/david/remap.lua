@@ -119,4 +119,4 @@ vim.keymap.set("n", "n", "nzzzv")
 
 --center cursor on page-down/up
 vim.keymap.set("n", "<leader>n", "<C-d>zz")
-vim.keymap.set("n", "<leader>v", "<C-u>zz")
+vim.keymap.set("n", "<leader>m", "<C-u>zz")
