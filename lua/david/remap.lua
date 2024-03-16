@@ -109,6 +109,8 @@ vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 --Toggle colorizer
 vim.keymap.set({'n','v'}, '<leader>c', vim.cmd.ColorizerToggle)
 
+vim.keymap.set({'n','v'}, '<leader><leader>',"<cmd>silent !tmux neww tnew.sh<CR>")
+
 --Move selected lines up/down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
