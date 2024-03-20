@@ -52,7 +52,7 @@ vim.keymap.set("n", "<leader>j", vim.cmd.bprevious)
 --function()
 --    vim.cmd.winc("j")
 --end)
-vim.keymap.set("n", "<leader>k",vim.cmd.bnext)
+vim.keymap.set("n", "<leader>k", vim.cmd.bnext)
 --function()
 --    vim.cmd.winc("k")
 --end)
@@ -107,9 +107,9 @@ vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 ----Other cool stuff-----------------------------------------------------------
 
 --Toggle colorizer
-vim.keymap.set({'n','v'}, '<leader>c', vim.cmd.ColorizerToggle)
+vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.cmd.ColorizerToggle)
 
-vim.keymap.set({'n','v'}, '<leader><leader>',"<cmd>silent !tmux neww tnew.sh<CR>")
+vim.keymap.set({ 'n', 'v' }, '<leader><leader>', "<cmd>silent !tmux neww tnew.sh<CR>")
 
 --Move selected lines up/down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")

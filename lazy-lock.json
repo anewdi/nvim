@@ -1,4 +1,5 @@
 {
+  "Highstr.nvim": { "branch": "main", "commit": "1cb5e030bb16df52c8428b53dc235466a4eb1d01" },
   "LuaSnip": { "branch": "master", "commit": "a7a4b4682c4b3e2ba82b82a4e6e5f5a0e79dec32" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "5af77f54de1b16c34b23cba810150689a3a90312" },
   "everforest": { "branch": "master", "commit": "d8ce3131f7491c61bd751bd455e2ddc0d47e74e9" },
