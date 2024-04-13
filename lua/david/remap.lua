@@ -65,6 +65,17 @@ vim.keymap.set("n", "<leader>h", function()
     vim.cmd.winc("h")
 end)
 
+vim.keymap.set("n", "<leader>.", function()
+    vim.cmd('vert res +8')
+end)
+
+vim.keymap.set("n", "<leader>,", function()
+    vim.cmd('vert res -8')
+end)
+
+vim.keymap.set("n", "<leader>=", function()
+    vim.cmd('horizontal wincmd =')
+end)
 ----Manipulating windows ------------------------------------------------------
 
 vim.keymap.set("n", "<leader>qq", function()

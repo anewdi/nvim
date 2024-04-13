@@ -17,8 +17,6 @@ return {
         local lsp_zero = require('lsp-zero')
 
         lsp_zero.on_attach(function(client, bufnr)
-            -- see :help lsp-zero-keybindings
-            -- to learn the available actions
             lsp_zero.default_keymaps({ buffer = bufnr })
         end)
 
@@ -66,8 +64,7 @@ return {
         local signs = { Error = "x", Warn = "x", Hint = "󰌶 ", Info = " " }
         for type, icon in pairs(signs) do
             local hl = "DiagnosticSign" .. type
-            vim.fn.sign_define(hl, { text = '',linehl = '', texthl = hl, numhl = hl })
+            vim.fn.sign_define(hl, { text = '', linehl = '', texthl = hl, numhl = hl })
         end
-
     end
 }
