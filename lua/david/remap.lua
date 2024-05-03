@@ -32,7 +32,7 @@ end)
 local builtin = require('telescope.builtin')
 
 vim.keymap.set('n', '<leader>fg', builtin.git_files)
-vim.keymap.set('n', '<leader>fs', function()
+vim.keymap.set('n', '<leader>/', function()
     builtin.live_grep({ cwd = vim.fn.expand('%:p:h:h') });
 end)
 
@@ -120,6 +120,7 @@ vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 --Toggle colorizer
 vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.cmd.ColorizerToggle)
 
+--Tmux switch session
 vim.keymap.set({ 'n', 'v' }, '<leader><leader>', "<cmd>silent !tmux neww tnew.sh<CR>")
 
 --Move selected lines up/down
@@ -131,5 +132,5 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "n", "nzzzv")
 
 --center cursor on page-down/up
-vim.keymap.set("n", "<leader>n", "<C-d>zz")
-vim.keymap.set("n", "<leader>m", "<C-u>zz")
+--vim.keymap.set("n", "<leader>n", "<C-d>zz")
+--vim.keymap.set("n", "<leader>m", "<C-u>zz")

@@ -23,15 +23,6 @@ return {
         require('mason').setup({})
         require('mason-lspconfig').setup({
             ensure_installed = {
-                'tsserver',
-                'eslint',
-                'lua_ls',
-                'rust_analyzer',
-                'svelte',
-                'pylsp',
-                'clangd',
-                'bashls',
-                'quick_lint_js',
             },
             handlers = {
                 lsp_zero.default_setup,
