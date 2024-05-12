@@ -32,6 +32,9 @@ return {
         --Use this on normal distro
         require('mason').setup({})
         require('mason-lspconfig').setup({
+            handlers = {
+                lsp_zero.default_setup,
+            },
             ensure_installed = {
                 --'tsserver',
                 --'eslint',
@@ -42,9 +45,6 @@ return {
                 --'clangd',
                 --'bashls',
                 --'quick_lint_js',
-            },
-            handlers = {
-                lsp_zero.default_setup,
             },
         })
 
