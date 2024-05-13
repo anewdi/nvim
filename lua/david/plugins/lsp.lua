@@ -48,28 +48,18 @@ return {
         --        lsp_zero.default_setup,
         --    },
         --    ensure_installed = {
-        --        --'tsserver',
-        --        --'eslint',
-        --        --'lua_ls',
-        --        --'rust_analyzer',
-        --        --'svelte',
-        --        --'pylsp',
-        --        --'clangd',
-        --        --'bashls',
-        --        --'quick_lint_js',
+        --         --'nixd',
+        --         --'lua_ls',
+        --         --'pylsp',
+        --         --'bashls',
         --    },
         --})
 
         --Use this duct tape solution for nix type devflow(add lsp in shell.nix)
         local servers = {
-            'tsserver',
-            'eslint',
             'lua_ls',
             'nixd',
-            'rust_analyzer',
-            'svelte',
             'pylsp',
-            'clangd',
             'bashls',
         }
         for i,server in pairs(servers)
