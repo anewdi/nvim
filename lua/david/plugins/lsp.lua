@@ -40,32 +40,30 @@ return {
         --})
 
 
-        --Loading of language servers
-        --Use this on normal distro
-        --require('mason').setup({})
-        --require('mason-lspconfig').setup({
-        --    handlers = {
-        --        lsp_zero.default_setup,
-        --    },
-        --    ensure_installed = {
-        --         --'nixd',
-        --         --'lua_ls',
-        --         --'pylsp',
-        --         --'bashls',
-        --    },
-        --})
+        --Automatic 
+        require('mason').setup({})
+        require('mason-lspconfig').setup({
+            handlers = {
+                lsp_zero.default_setup,
+            },
+            ensure_installed = {
+                 'lua_ls',
+            },
+        })
 
-        --Use this duct tape solution for nix type devflow(add lsp in shell.nix)
-        local servers = {
-            'lua_ls',
-            'nixd',
-            'pylsp',
-            'bashls',
-        }
-        for i,server in pairs(servers)
-        do
-            lsp_zero.default_setup(server)
-        end
+        lsp_zero.default_setup('nixd')
+
+        --Manual solution(add in nix shell or syspkgs)
+        --local servers = {
+        --    'lua_ls',
+        --    'nixd',
+        --    'pylsp',
+        --    'bashls',
+        --}
+        --for i, server in pairs(servers)
+        --do
+        --    lsp_zero.default_setup(server)
+        --end
 
 
         --Completion setup
@@ -93,11 +91,11 @@ return {
             },
         })
 
+        --Remove signs and only highlight number and text
         local signs = { Error = "x", Warn = "x", Hint = "!", Info = " " }
         for type, icon in pairs(signs) do
             local hl = "DiagnosticSign" .. type
             vim.fn.sign_define(hl, { text = '', linehl = '', texthl = hl, numhl = hl })
         end
-
     end
 }
