@@ -1,1 +1,1 @@
-require("david")
+require("init")
