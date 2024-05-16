@@ -65,6 +65,10 @@ vim.keymap.set("n", "<leader>h", function()
     vim.cmd.winc("h")
 end)
 
+vim.keymap.set("n", "<leader><tab>", function()
+    vim.cmd.winc("p")
+end)
+
 vim.keymap.set("n", "<leader>.", function()
     vim.cmd('vert res +8')
 end)
