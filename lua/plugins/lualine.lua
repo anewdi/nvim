@@ -25,7 +25,7 @@ return {
                 lualine_a = {},
                 lualine_b = {},
                 lualine_c = {'branch','%F','diagnostics'},
-                lualine_x = {'encoding', 'location'},
+                lualine_x = {'encoding'},
                 lualine_y = {'location', 'progress'},
                 lualine_z = {},
             },
