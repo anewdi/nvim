@@ -55,13 +55,9 @@ return {
 
         --Manual solution(add in nix shell or syspkgs)
         --local servers = {
-        --    'lua_ls',
-        --    'nixd',
-        --    'pylsp',
-        --    'bashls',
+        --    'clangd',
         --}
-        --for i, server in pairs(servers)
-        --do
+        --for i, server in pairs(servers) do
         --    lsp_zero.default_setup(server)
         --end
 

@@ -5,9 +5,9 @@ return {
         require('lualine').setup {
             options = {
                 icons_enabled = true,
-                theme = 'iceberg_dark',
-                component_separators = { left = '', right = '' },
-                section_separators = { left = '', right = '' },
+                theme = 'auto',
+                component_separators = { left = '|', right = '|' },
+                section_separators = '',
                 disabled_filetypes = {
                     statusline = {},
                     winbar = {},
@@ -22,13 +22,14 @@ return {
                 }
             },
             sections = {
-                lualine_a = {{'mode', fmt = function(str) return str:sub(1,1) end},'branch'},
-                lualine_b = {'%F','diagnostics'},
-                lualine_c = {},
-                lualine_x = {'diff'},
-                lualine_y = {'encoding', 'filesize'},
-                lualine_z = {'location', 'progress'}
+                lualine_a = {},
+                lualine_b = {},
+                lualine_c = {'branch','%F','diagnostics'},
+                lualine_x = {'encoding', 'location'},
+                lualine_y = {'location', 'progress'},
+                lualine_z = {},
             },
+            inactive_sections = {},
 
             tabline = {
                 lualine_a = {{'buffers', mode = 2}},
