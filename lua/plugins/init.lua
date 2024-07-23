@@ -2,8 +2,6 @@ return {
     { 'norcalli/nvim-colorizer.lua' },
     --Undotree
     { "mbbill/undotree" },
-    --Git integration/wrapper
-    { 'tpope/vim-fugitive' },
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",

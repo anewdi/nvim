@@ -52,6 +52,7 @@ return {
         })
 
         lsp_zero.default_setup('nixd')
+        lsp_zero.default_setup('clangd')
 
         --Manual solution(add in nix shell or syspkgs)
         --local servers = {
