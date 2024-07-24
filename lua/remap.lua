@@ -20,12 +20,6 @@ vim.keymap.set('n', '<leader>6', function()
     require('lualine.components.buffers').buffer_jump(6, '!')
 end)
 
-----Trouble--------------------------------------------------------------------
-
-local trouble = require("trouble")
-vim.keymap.set('n', '<leader>t', function()
-    trouble.toggle('document_diagnostics')
-end)
 
 ----Telescope------------------------------------------------------------------
 
@@ -48,14 +42,8 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 ----Moving between windows and buffers-----------------------------------------
 
-vim.keymap.set("n", "<leader>j", vim.cmd.bprevious)
---function()
---    vim.cmd.winc("j")
---end)
-vim.keymap.set("n", "<leader>k", vim.cmd.bnext)
---function()
---    vim.cmd.winc("k")
---end)
+vim.keymap.set("n", "<leader>n", vim.cmd.bprevious)
+vim.keymap.set("n", "<leader>m", vim.cmd.bnext)
 
 vim.keymap.set("n", "<leader>l", function()
     vim.cmd.winc("l")
@@ -65,8 +53,12 @@ vim.keymap.set("n", "<leader>h", function()
     vim.cmd.winc("h")
 end)
 
-vim.keymap.set("n", "<leader><tab>", function()
-    vim.cmd.winc("p")
+vim.keymap.set("n", "<leader>j", function()
+    vim.cmd.winc("j")
+end)
+
+vim.keymap.set("n", "<leader>k", function()
+    vim.cmd.winc("k")
 end)
 
 vim.keymap.set("n", "<leader>.", function()
@@ -75,6 +67,14 @@ end)
 
 vim.keymap.set("n", "<leader>,", function()
     vim.cmd('vert res -8')
+end)
+
+vim.keymap.set("n", "<leader>i", function()
+    vim.cmd('res -3')
+end)
+
+vim.keymap.set("n", "<leader>o", function()
+    vim.cmd('res +3')
 end)
 
 vim.keymap.set("n", "<leader>=", function()
@@ -109,23 +109,15 @@ vim.keymap.set("n", "<leader>d", vim.cmd.bd)
 vim.keymap.set("n", "<leader>r", vim.cmd.Ex)
 --Format code
 vim.keymap.set("n", "<leader>p", vim.lsp.buf.format)
---Escape to normal mode
-vim.keymap.set({ 'i', 'v' }, '<S-BS>', '<esc>')
 
 --Copy to system clipboard
 vim.keymap.set({ 'n', 'v', }, '<leader>y', "\"+y")
 
-----Git------------------------------------------------------------------------
-
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 
 ----Other cool stuff-----------------------------------------------------------
 
 --Toggle colorizer
 vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.cmd.ColorizerToggle)
-
---Tmux switch session
-vim.keymap.set({ 'n', 'v' }, '<leader><leader>', "<cmd>silent !tmux neww tnew.sh<CR>")
 
 --Move selected lines up/down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -134,7 +126,3 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 --automatic centering on next search match
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "n", "nzzzv")
-
---center cursor on page-down/up
---vim.keymap.set("n", "<leader>n", "<C-d>zz")
---vim.keymap.set("n", "<leader>m", "<C-u>zz")

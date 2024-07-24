@@ -1,4 +1,6 @@
 vim.g.mapleader = " "
+--Undotree stuff
+vim.g.undotree_DiffAutoOpen = 0
 
 --Let insert cursor be the same as normal one 
 vim.opt.guicursor = ""

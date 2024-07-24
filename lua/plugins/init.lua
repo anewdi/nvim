@@ -1,7 +1,7 @@
 return {
     { 'norcalli/nvim-colorizer.lua' },
     --Undotree
-    { "mbbill/undotree" },
+    {"mbbill/undotree"},
     {
         'windwp/nvim-autopairs',
         event = "InsertEnter",

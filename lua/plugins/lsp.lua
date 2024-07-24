@@ -40,27 +40,32 @@ return {
         --})
 
 
-        --Automatic 
-        require('mason').setup({})
-        require('mason-lspconfig').setup({
-            handlers = {
-                lsp_zero.default_setup,
-            },
-            ensure_installed = {
-                 'lua_ls',
-            },
-        })
+        local servers = {
+            clangd = {},
+            cssls = {},
+            bashls = {},
+            lua_ls = {},
+            nil_ls = {},
+        }
 
-        lsp_zero.default_setup('nixd')
-        lsp_zero.default_setup('clangd')
-
-        --Manual solution(add in nix shell or syspkgs)
-        --local servers = {
-        --    'clangd',
-        --}
-        --for i, server in pairs(servers) do
-        --    lsp_zero.default_setup(server)
-        --end
+        if vim.fn.exepath('nix') ~= "" then
+            servers.nixd = {}
+            --NIX solution(add in nix shell or syspkgs)
+            for server,i in pairs(servers) do
+                if vim.fn.exepath(server) ~= "" then 
+                    lsp_zero.default_setup(server)
+                end
+            end
+        else
+            --Standard
+            require('mason').setup({})
+            require('mason-lspconfig').setup({
+                handlers = {
+                    lsp_zero.default_setup,
+                },
+                ensure_installed = vim.tbl_keys(servers),
+            })
+        end
 
 
         --Completion setup
