@@ -42,10 +42,7 @@ return {
 
         local servers = {
             clangd = {},
-            cssls = {},
-            bashls = {},
             lua_ls = {},
-            nil_ls = {},
         }
 
         if vim.fn.exepath('nix') ~= "" then
