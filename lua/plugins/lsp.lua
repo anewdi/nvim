@@ -17,8 +17,10 @@ return {
         local lsp_zero = require('lsp-zero')
         
         -- Apply default keybinds
+        -- Remove lsp highlighting
         local lsp_attach = function(client, bufnr)
             lsp_zero.default_keymaps({ buffer = bufnr })
+            client.server_capabilities.semanticTokensProvider = nil
         end
 
         lsp_zero.extend_lspconfig({
@@ -28,12 +30,6 @@ return {
             sign_text = true,
         })
 
-        -- Remove lsp highlighting
-        lsp_zero.set_server_config({
-            on_init = function(client)
-                client.server_capabilities.semanticTokensProvider = nil
-            end,
-        })
 
         -- LSPs
         local lspconfig = require('lspconfig')
