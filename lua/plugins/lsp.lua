@@ -14,43 +14,56 @@ return {
     },
 
     config = function()
-        --Lsp zero stuff
         local lsp_zero = require('lsp-zero')
-
-        --Apply default keybinds
-        lsp_zero.on_attach(function(client, bufnr)
+        
+        -- Apply default keybinds
+        local lsp_attach = function(client, bufnr)
             lsp_zero.default_keymaps({ buffer = bufnr })
-            --autoformat, only works properly when only one active lsp(for buffer)
-            --lsp_zero.buffer_autoformat()
-        end)
+        end
 
-        --Remove lsp highlighting
+        lsp_zero.extend_lspconfig({
+            capabilities = require('cmp_nvim_lsp').default_capabilities(),
+            lsp_attach = lsp_attach,
+            float_border = 'rounded',
+            sign_text = true,
+        })
+
+        -- Remove lsp highlighting
         lsp_zero.set_server_config({
             on_init = function(client)
                 client.server_capabilities.semanticTokensProvider = nil
             end,
         })
 
-        --Format on save
-        --lsp_zero.format_on_save({
-        --    format_opts = {
-        --        async = false,
-        --        timeout_ms = 10000,
-        --    }
-        --})
+        -- LSPs
+        local lspconfig = require('lspconfig')
 
-
+        -- Format: Mason name = {binaryName, config}
         local servers = {
-            clangd = {},
-            lua_ls = {},
+            clangd = {
+                bin = "clangd",
+                conf = {}
+            },
+            lua_ls = {
+                bin = "lua-language-server",
+                conf = {
+                    settings = {
+                        Lua = {
+                            diagnostics = {
+                                globals = {'vim'},
+                            }
+                        }
+                    }
+                }
+            },
         }
 
         if vim.fn.exepath('nix') ~= "" then
-            servers.nixd = {}
+            servers.nixd = {bin = "nixd", conf = {}}
             --NIX solution(add in nix shell or syspkgs)
-            for server,i in pairs(servers) do
-                if vim.fn.exepath(server) ~= "" then 
-                    lsp_zero.default_setup(server)
+            for server,set in pairs(servers) do
+                if vim.fn.exepath(set.bin) ~= "" then
+                    lspconfig[server].setup(set.conf)
                 end
             end
         else
@@ -58,28 +71,34 @@ return {
             require('mason').setup({})
             require('mason-lspconfig').setup({
                 handlers = {
-                    lsp_zero.default_setup,
+                    function(server_name)
+                        lspconfig[server_name].setup({servers[server_name].conf})
+                    end,
+                    lua_ls = function()
+                        lspconfig.lua_ls.setup(servers.lua_ls.conf)
+                    end,
                 },
                 ensure_installed = vim.tbl_keys(servers),
             })
         end
-
 
         --Completion setup
         local cmp = require('cmp')
         local cmp_action = require('lsp-zero').cmp_action()
 
         cmp.setup({
+            sources = {
+                {name = 'nvim_lsp'},
+            },
             mapping = cmp.mapping.preset.insert({
                 ['<Tab>'] = cmp_action.tab_complete(),
-                ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
+                ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
             })
         })
 
-        --Diagnostic setup
+        -- Diagnostic setup
         vim.diagnostic.config({
             virtual_text = false,
-            underline = true,
             float = {
                 focusable = false,
                 style = "minimal",
@@ -90,11 +109,12 @@ return {
             },
         })
 
-        --Remove signs and only highlight number and text
-        local signs = { Error = "x", Warn = "x", Hint = "!", Info = " " }
+        -- Remove signs and only highlight number and text
+        local signs = { Error = "X", Warn = "X", Hint = "!", Info = " " }
         for type, icon in pairs(signs) do
             local hl = "DiagnosticSign" .. type
-            vim.fn.sign_define(hl, { text = '', linehl = '', texthl = hl, numhl = hl })
+            -- Modify existing signs, just remove everything except numhl 
+            vim.fn.sign_define(hl, { text = '', linehl = '', texthl = '', numhl = hl})
         end
     end
 }
