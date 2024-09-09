@@ -36,10 +36,7 @@ return {
 
         -- Format: Mason name = {binaryName, config}
         local servers = {
-            clangd = {
-                bin = "clangd",
-                conf = {}
-            },
+            clangd = { bin = "clangd", conf = {} },
             lua_ls = {
                 bin = "lua-language-server",
                 conf = {
@@ -52,6 +49,7 @@ return {
                     }
                 }
             },
+            pylsp = { bin = "pylsp", conf = {} },
         }
 
         if vim.fn.exepath('nix') ~= "" then
