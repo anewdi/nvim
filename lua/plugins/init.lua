@@ -8,6 +8,11 @@ return {
         opts = {} -- this is equalent to setup({}) function
     },
     {
+        'windwp/nvim-ts-autotag',
+        event = "InsertEnter",
+        opts = {} -- this is equalent to setup({}) function
+    },
+    {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
         opts = {}

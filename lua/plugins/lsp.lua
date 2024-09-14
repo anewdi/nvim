@@ -1,17 +1,31 @@
-return {
-    --Lsp Zero
-    'VonHeikemen/lsp-zero.nvim',
-    dependencies = {
+
+if vim.fn.exepath('nix') ~= "" then
+    LspDeps = {
         'neovim/nvim-lspconfig',
         --LSP support
         --Autocomp
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/nvim-cmp',
-        'L3MON4D3/LuaSnip',
+        --'L3MON4D3/LuaSnip',
+    }
+else
+    LspDeps = {
+        'neovim/nvim-lspconfig',
+        --LSP support
+        --Autocomp
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/nvim-cmp',
+        --'L3MON4D3/LuaSnip',
         --Lsp servers from neovim management
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
-    },
+    }
+end
+
+return {
+    --Lsp Zero
+    'VonHeikemen/lsp-zero.nvim',
+    dependencies = LspDeps,
 
     config = function()
         local lsp_zero = require('lsp-zero')
@@ -43,12 +57,15 @@ return {
                     settings = {
                         Lua = {
                             diagnostics = {
-                                globals = {'vim'},
+                                globals = {
+                                    'vim'
+                                },
                             }
                         }
                     }
                 }
             },
+            html = { bin = "vscode-html-language-server", conf = {} },
             pylsp = { bin = "pylsp", conf = {} },
         }
 
@@ -67,9 +84,6 @@ return {
                 handlers = {
                     function(server_name)
                         lspconfig[server_name].setup({servers[server_name].conf})
-                    end,
-                    lua_ls = function()
-                        lspconfig.lua_ls.setup(servers.lua_ls.conf)
                     end,
                 },
                 ensure_installed = vim.tbl_keys(servers),
