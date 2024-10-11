@@ -108,7 +108,7 @@ vim.keymap.set("n", "<leader>d", vim.cmd.bd)
 --Reach(explore)
 vim.keymap.set("n", "<leader>r", vim.cmd.Ex)
 --Format code
-vim.keymap.set("n", "<leader>p", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>p", require("conform").format)
 
 --Copy to system clipboard
 vim.keymap.set({ 'n', 'v', }, '<leader>y', "\"+y")

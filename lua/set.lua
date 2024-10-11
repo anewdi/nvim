@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 --Undotree stuff
 vim.g.undotree_DiffAutoOpen = 0
 
---Let insert cursor be the same as normal one 
+--Let insert cursor be the same as normal one
 vim.opt.guicursor = ""
 
 --Numbered & relative linenumbers
@@ -26,10 +26,10 @@ vim.opt.undofile = true
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
---Terminal colors 
+--Terminal colors
 vim.opt.termguicolors = true
 
---Always keep 8 lines to bottom 
+--Always keep 8 lines to bottom
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
