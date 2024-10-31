@@ -65,6 +65,8 @@ return {
 			},
 			html = { bin = "vscode-html-language-server", conf = {} },
 			cssls = { bin = "vscode-css-language-server", conf = {} },
+			jsonls = { bin = "vscode-json-language-server", conf = {} },
+			eslint = { bin = "vscode-eslint-language-server", conf = {} },
 			ruff = { bin = "ruff", conf = {} },
 			texlab = { bin = "texlab", conf = {} },
 		}
