@@ -37,26 +37,30 @@ return {
 			--all_refrences = true,
 		})
 
-		dap.adapters.cppdbg = {
-			id = "cppdbg",
-			type = "executable",
-			command = os.getenv("CDAP"),
+		dap.adapters = {
+			cppdbg = {
+				id = "cppdbg",
+				type = "executable",
+				command = os.getenv("CDAP"),
+			},
 		}
 
-		dap.configurations.c = {
-			{
-				name = "Launch file",
-				type = "cppdbg",
-				request = "launch",
-				program = function()
-					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-				end,
-				args = function()
-					local args_string = vim.fn.input("Arguments: ")
-					return vim.split(args_string, " ")
-				end,
-				cwd = "${workspaceFolder}",
-				stopAtEntry = true,
+		dap.configurations = {
+			c = {
+				{
+					name = "Launch file",
+					type = "cppdbg",
+					request = "launch",
+					program = function()
+						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+					end,
+					args = function()
+						local args_string = vim.fn.input("Arguments: ")
+						return vim.split(args_string, " ")
+					end,
+					cwd = "${workspaceFolder}",
+					stopAtEntry = true,
+				},
 			},
 		}
 

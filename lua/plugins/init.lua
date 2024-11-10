@@ -4,7 +4,6 @@ return {
 	}, --Undotree
 	{
 		"mbbill/undotree",
-		keys = "<leader>u",
 	},
 	{
 		"windwp/nvim-ts-autotag",
