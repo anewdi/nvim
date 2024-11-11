@@ -1,11 +1,11 @@
-return {
+local lualine = {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		options = {
 			icons_enabled = true,
 			theme = "auto",
-			component_separators = { left = "|", right = "|" },
+			component_separators = { left = "|", right = "" },
 			section_separators = "",
 			disabled_filetypes = {
 				statusline = {},
@@ -23,9 +23,9 @@ return {
 		sections = {
 			lualine_a = {},
 			lualine_b = {},
-			lualine_c = { "branch", "%F", "diagnostics" },
-			lualine_x = { "encoding" },
-			lualine_y = { "location", "progress" },
+			lualine_c = { "%F", "diagnostics" },
+			lualine_x = { "encoding", "location", "progress" },
+			lualine_y = {},
 			lualine_z = {},
 		},
 		inactive_sections = {},
@@ -41,3 +41,4 @@ return {
 		extensions = {},
 	},
 }
+return lualine
