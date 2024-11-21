@@ -70,6 +70,7 @@ return {
 			ts_ls = { bin = "typescript-language-server", conf = {} },
 			ruff = { bin = "ruff", conf = {} },
 			texlab = { bin = "texlab", conf = {} },
+			glslls = { bin = "glslls", conf = {} },
 		}
 
 		if vim.fn.exepath("nix") ~= "" then
