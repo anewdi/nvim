@@ -16,7 +16,7 @@ local lualine = {
 			globalstatus = true,
 			refresh = {
 				statusline = 1000,
-				tabline = 1000,
+				tabline = 100,
 				winbar = 1000,
 			},
 		},
