@@ -15,8 +15,8 @@ local lualine = {
 			always_divide_middle = true,
 			globalstatus = true,
 			refresh = {
-				statusline = 1000,
-				tabline = 100,
+				statusline = 100,
+				tabline = 1000,
 				winbar = 1000,
 			},
 		},
@@ -30,14 +30,14 @@ local lualine = {
 		},
 		inactive_sections = {},
 
-		tabline = {
-			lualine_a = { { "buffers", mode = 2 } },
-			lualine_b = {},
-			lualine_c = {},
-			lualine_x = {},
-			lualine_y = {},
-			lualine_z = {},
-		},
+		--tabline = {
+		--	lualine_a = { { "buffers", mode = 2 } },
+		--	lualine_b = {},
+		--	lualine_c = {},
+		--	lualine_x = {},
+		--	lualine_y = {},
+		--	lualine_z = {},
+		--},
 		extensions = {},
 	},
 }
