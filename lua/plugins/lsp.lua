@@ -71,6 +71,7 @@ return {
 			ruff = { bin = "ruff", conf = {} },
 			texlab = { bin = "texlab", conf = {} },
 			glslls = { bin = "glslls", conf = {} },
+			jdtls = { bin = "jdtls", conf = {} },
 		}
 
 		if vim.fn.exepath("nix") ~= "" then
