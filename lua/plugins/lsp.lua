@@ -1,20 +1,18 @@
 if vim.fn.exepath("nix") ~= "" then
 	LspDeps = {
-		"neovim/nvim-lspconfig",
 		--LSP support
+		"neovim/nvim-lspconfig",
 		--Autocomp
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/nvim-cmp",
-		--'L3MON4D3/LuaSnip',
 	}
 else
 	LspDeps = {
-		"neovim/nvim-lspconfig",
 		--LSP support
+		"neovim/nvim-lspconfig",
 		--Autocomp
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/nvim-cmp",
-		--'L3MON4D3/LuaSnip',
 		--Lsp servers from neovim management
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
@@ -71,7 +69,14 @@ return {
 			ruff = { bin = "ruff", conf = {} },
 			texlab = { bin = "texlab", conf = {} },
 			glslls = { bin = "glslls", conf = {} },
-			jdtls = { bin = "jdtls", conf = {} },
+			jdtls = {
+				bin = "jdtls",
+				conf = {
+					init_options = {
+						bundles = { os.getenv("javadebugpath") },
+					},
+				},
+			},
 		}
 
 		if vim.fn.exepath("nix") ~= "" then
@@ -103,7 +108,13 @@ return {
 			sources = {
 				{ name = "nvim_lsp" },
 			},
+			snippet = {
+				expand = function(args)
+					vim.snippet.expand(args.body)
+				end,
+			},
 			mapping = cmp.mapping.preset.insert({
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
 				["<Tab>"] = cmp_action.tab_complete(),
 				["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
 			}),
