@@ -5,7 +5,7 @@ return {
 		"nvim-neotest/nvim-nio",
 		"theHamsta/nvim-dap-virtual-text",
 	},
-	keys = { "<leader>gu", "<leader>gb" },
+	keys = { "<leader>gu", "<leader>gb", "<leader>F1","<leader>F2", "<leader>F3", "<leader>F4" },
 	config = function()
 		local dap = require("dap")
 		local dapui = require("dapui")
@@ -15,7 +15,6 @@ return {
 				enabled = false,
 				element = "console",
 			},
-
 			layouts = {
 				{
 					elements = {
@@ -31,10 +30,7 @@ return {
 		})
 
 		require("nvim-dap-virtual-text").setup({
-			--all_frames = true,
-			--virt_text_pos = 'eol',
 			only_first_definition = false,
-			--all_refrences = true,
 		})
 
 		dap.adapters = {
@@ -45,24 +41,25 @@ return {
 			},
 		}
 
-		dap.configurations = {
-			c = {
-				{
-					name = "Launch file",
-					type = "cppdbg",
-					request = "launch",
-					program = function()
-						return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-					end,
-					args = function()
-						local args_string = vim.fn.input("Arguments: ")
-						return vim.split(args_string, " ")
-					end,
-					cwd = "${workspaceFolder}",
-					stopAtEntry = true,
-				},
+		dap.configurations.c = {
+			{
+				name = "Launch file",
+				type = "cppdbg",
+				request = "launch",
+				program = function()
+                    local same = vim.fn.expand("%:p:r")
+                    local f = io.open(same, "r")
+                    if (f~= nil) then io.close(f) return same else return "a.out" end
+                end,
+				args = function()
+					local args_string = vim.fn.input("Arguments: ")
+					return vim.split(args_string, " ")
+				end,
+				cwd = "${workspaceFolder}",
+				stopAtEntry = true,
 			},
 		}
+		dap.configurations.cpp = dap.configurations.c
 
 		vim.keymap.set({ "n", "v" }, "<leader>gb", dap.toggle_breakpoint)
 		vim.keymap.set({ "n", "v" }, "<leader>gu", dapui.toggle)
@@ -72,13 +69,10 @@ return {
 		vim.keymap.set({ "n", "v" }, "<leader>go", function()
 			dapui.float_element("stacks", { enter = true })
 		end)
-
-		vim.keymap.set("n", "<F1>", dap.continue)
-		vim.keymap.set("n", "<F2>", dap.step_over)
-		vim.keymap.set("n", "<F3>", dap.step_back)
-		vim.keymap.set("n", "<F8>", dap.step_out)
-		vim.keymap.set("n", "<F9>", dap.step_into)
-		vim.keymap.set("n", "<F10>", dap.restart)
+		vim.keymap.set("n", "<leader><F1>", dap.continue)
+		vim.keymap.set("n", "<leader><F2>", dap.step_over)
+		vim.keymap.set("n", "<leader><F3>", dap.step_into)
+		vim.keymap.set("n", "<leader><F4>", dap.step_out)
 
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			dapui.open({})

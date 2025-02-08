@@ -9,7 +9,7 @@ return {
 			python = { "ruff_format" },
 
 			rust = { "rustfmt" },
-			--
+
 			-- Conform will run the first available formatter
 			javascript = { "prettierd", "prettier", stop_after_first = true },
 			html = { "prettierd", "prettier", stop_after_first = true },
@@ -21,6 +21,14 @@ return {
 		format_on_save = {
 			lsp_format = "fallback",
 			timeout_ms = 500,
+		},
+	},
+	keys = {
+		{
+			"<leader>p",
+			function()
+				require("conform").format()
+			end,
 		},
 	},
 }

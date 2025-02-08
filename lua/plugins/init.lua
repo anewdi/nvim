@@ -1,25 +1,29 @@
 return {
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
-		---@module 'render-markdown'
-		---@type render.md.UserConfig
-		opts = {},
-	},
-	{
-		"norcalli/nvim-colorizer.lua",
-	}, --Undotree
-	{
-		"mbbill/undotree",
-	},
-	{
-		"windwp/nvim-ts-autotag",
-		ft = { "ts", "html", "css", "js" },
-		opts = {}, -- this is equalent to setup({}) function
+	{ "MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		ft = { "md" },
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-		opts = {},
+        opts = {},
+	},
+	{
+		"norcalli/nvim-colorizer.lua",
+		keys = {
+			{ "<leader>c", vim.cmd.ColorizerToggle },
+		},
+        opts = {},
+	},
+	{
+		"mbbill/undotree",
+		keys = {
+			{ "<leader>u", vim.cmd.UndotreeToggle },
+		},
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		ft = { "ts", "html", "css", "js" },
+        opts = {},
 	},
 }
