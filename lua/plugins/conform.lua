@@ -16,6 +16,8 @@ return {
 			css = { "prettierd", "prettier", stop_after_first = true },
 
 			nix = { "nixfmt" },
+
+			cpp = { lsp_format = "prefer" },
 		},
 
 		format_on_save = {
@@ -23,6 +25,7 @@ return {
 			timeout_ms = 500,
 		},
 	},
+	lazy = false,
 	keys = {
 		{
 			"<leader>p",

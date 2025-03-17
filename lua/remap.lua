@@ -79,6 +79,9 @@ end)
 vim.keymap.set("n", "<leader>ql", function()
 	vim.cmd.wincmd("L")
 end)
+vim.keymap.set("n", "<leader>qd", function()
+	vim.cmd("close")
+end)
 
 ----Perform mischalennious vim commands through remaps-------------------------
 

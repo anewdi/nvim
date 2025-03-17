@@ -1,18 +1,13 @@
 if vim.fn.exepath("nix") ~= "" then
 	LspDeps = {
-		--LSP support
-		"neovim/nvim-lspconfig",
-		--Autocomp
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/nvim-cmp",
+		--Completion
+		"saghen/blink.cmp",
 	}
 else
 	LspDeps = {
-		--LSP support
-		"neovim/nvim-lspconfig",
-		--Autocomp
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/nvim-cmp",
+		--Completion
+		"saghen/blink.cmp",
+
 		--Lsp servers from neovim management
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
@@ -20,30 +15,10 @@ else
 end
 
 return {
-	--Lsp Zero
-	"VonHeikemen/lsp-zero.nvim",
+	"neovim/nvim-lspconfig",
 	dependencies = LspDeps,
 
 	config = function()
-		local lsp_zero = require("lsp-zero")
-
-		-- Apply default keybinds
-		-- Remove lsp highlighting
-		local lsp_attach = function(client, bufnr)
-			lsp_zero.default_keymaps({ buffer = bufnr })
-			client.server_capabilities.semanticTokensProvider = nil
-		end
-
-		lsp_zero.extend_lspconfig({
-			capabilities = require("cmp_nvim_lsp").default_capabilities(),
-			lsp_attach = lsp_attach,
-			float_border = "rounded",
-			sign_text = true,
-		})
-
-		-- LSPs
-		local lspconfig = require("lspconfig")
-
 		-- Format: Mason name = {binaryName, config}
 		local servers = {
 			clangd = { bin = "clangd", conf = {} },
@@ -79,20 +54,27 @@ return {
 			},
 		}
 
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
+		local lspconfig = require("lspconfig")
+
+		local on_init = function(client, bufnr)
+			client.server_capabilities.semantictokensprovider = nil
+		end
+
 		if vim.fn.exepath("nix") ~= "" then
 			servers.nixd = { bin = "nixd", conf = {} }
-			--NIX solution(add in nix shell or syspkgs)
 			for server, set in pairs(servers) do
-				if vim.fn.exepath(set.bin) ~= "" then
-					lspconfig[server].setup(set.conf)
-				end
+				set.conf.capabilities = capabilities
+				set.conf.on_init = on_init
+				lspconfig[server].setup(set.conf)
 			end
 		else
-			--Standard
 			require("mason").setup({})
 			require("mason-lspconfig").setup({
 				handlers = {
 					function(server_name)
+						servers[server_name].conf.capabilities = capabilities
+						servers[server_name].conf.on_init = on_init
 						lspconfig[server_name].setup({ servers[server_name].conf })
 					end,
 				},
@@ -100,44 +82,15 @@ return {
 			})
 		end
 
-		--Completion setup
-		local cmp = require("cmp")
-		local cmp_action = require("lsp-zero").cmp_action()
-
-		cmp.setup({
-			sources = {
-				{ name = "nvim_lsp" },
-			},
-			snippet = {
-				expand = function(args)
-					vim.snippet.expand(args.body)
-				end,
-			},
-			mapping = cmp.mapping.preset.insert({
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
-				["<Tab>"] = cmp_action.tab_complete(),
-				["<S-Tab>"] = cmp.mapping.select_prev_item({ behavior = "select" }),
-			}),
-		})
-
 		-- Diagnostic setup
 		vim.diagnostic.config({
 			virtual_text = false,
-			float = {
-				focusable = false,
-				style = "minimal",
-				border = "rounded",
-				source = "always",
-				header = "",
-				prefix = "",
-			},
 		})
 
 		-- Remove signs and only highlight number and text
-		local signs = { Error = "X", Warn = "X", Hint = "!", Info = " " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			-- Modify existing signs, just remove everything except numhl
+		local signs = { "Error", "Warn", "Hint", "Info" }
+		for ind, value in pairs(signs) do
+			local hl = "DiagnosticSign" .. value
 			vim.fn.sign_define(hl, { text = "", linehl = "", texthl = "", numhl = hl })
 		end
 	end,
