@@ -1,19 +1,20 @@
 return {
-	{ "MeanderingProgrammer/render-markdown.nvim",
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
 		ft = { "md" },
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-        opts = {},
+		opts = {},
 	},
 	{
 		"norcalli/nvim-colorizer.lua",
 		keys = {
 			{ "<leader>c", vim.cmd.ColorizerToggle },
 		},
-        opts = {},
+		opts = {},
 	},
 	{
 		"mbbill/undotree",
@@ -24,6 +25,6 @@ return {
 	{
 		"windwp/nvim-ts-autotag",
 		ft = { "ts", "html", "css", "js" },
-        opts = {},
+		opts = {},
 	},
 }

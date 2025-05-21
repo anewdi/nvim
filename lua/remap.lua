@@ -1,24 +1,3 @@
-----Lualine--------------------------------------------------------------------
---Navigate buffers by lualine builtin buffer indexes
-vim.keymap.set("n", "<leader>1", function()
-	require("lualine.components.buffers").buffer_jump(1, "!")
-end)
-vim.keymap.set("n", "<leader>2", function()
-	require("lualine.components.buffers").buffer_jump(2, "!")
-end)
-vim.keymap.set("n", "<leader>3", function()
-	require("lualine.components.buffers").buffer_jump(3, "!")
-end)
-vim.keymap.set("n", "<leader>4", function()
-	require("lualine.components.buffers").buffer_jump(4, "!")
-end)
-vim.keymap.set("n", "<leader>5", function()
-	require("lualine.components.buffers").buffer_jump(5, "!")
-end)
-vim.keymap.set("n", "<leader>6", function()
-	require("lualine.components.buffers").buffer_jump(6, "!")
-end)
-
 ----Moving between windows and buffers-----------------------------------------
 
 vim.keymap.set("n", "<leader>n", vim.cmd.bprevious)
