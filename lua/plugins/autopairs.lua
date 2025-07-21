@@ -22,12 +22,12 @@ return {
 
 			Rule("\\left", "(\\right)", { "tex", "latex" }):with_pair(cond.not_inside_quote()),
 
-			Rule("\\begin{.*}", "", { "tex", "latex" })
-				:use_regex(true)
-				:replace_endpair(function(opts)
-					return "\\end" .. opts.prev_char:sub(string.find(opts.prev_char, "{"), #opts.prev_char)
-				end)
-				:end_wise(),
+			--		Rule("\\begin{.*}", "", { "tex", "latex" })
+			--			:use_regex(true)
+			--			:replace_endpair(function(opts)
+			--				return "\\end" .. opts.prev_char:sub(string.find(opts.prev_char, "{"), #opts.prev_char)
+			--			end)
+			--			:end_wise(),
 		})
 	end,
 }
