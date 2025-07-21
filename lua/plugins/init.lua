@@ -1,10 +1,5 @@
 return {
 	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-		ft = { "md" },
-	},
-	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		opts = {},
