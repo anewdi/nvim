@@ -81,20 +81,10 @@ vim.pack.add({
 	"https://github.com/windwp/nvim-ts-autotag",
 	"https://github.com/mbbill/undotree",
 	"https://github.com/norcalli/nvim-colorizer.lua",
-
-	"https://github.com/nvim-treesitter/nvim-treesitter",
 }, { confirm = false })
 
 require("ibl").setup()
 require("nvim-ts-autotag").setup()
-
-vim.api.nvim_create_autocmd("PackChanged", {
-	callback = function()
-		require("nvim-treesitter").update()
-	end,
-})
---local nts = require("nvim-treesitter")
---nts.install()
 
 require("vimtex")
 require("diagnostics")
@@ -105,3 +95,4 @@ require("theme")
 require("finder")
 require("autocomplete")
 require("lsp")
+require("ts")
