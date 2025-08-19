@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
 vim.opt.guicursor = ""
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -68,4 +67,74 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "n", "nzzzv")
 
+--some plugins
+vim.keymap.set("n", "<leader>c", vim.cmd.ColorizerToggle)
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+vim.keymap.set("n", "<leader>t", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>")
+
 require("lazym")
+
+----Plugins--------------------------------------------------------------------
+
+vim.opt.packpath:prepend(vim.fn.expand("~/.local/share/nvim/site/"))
+
+vim.pack.add({
+	"https://github.com/lukas-reineke/indent-blankline.nvim",
+	"https://github.com/windwp/nvim-autopairs",
+	"https://github.com/akinsho/bufferline.nvim",
+	"https://github.com/nvim-tree/nvim-web-devicons",
+	"https://github.com/folke/trouble.nvim",
+	"https://github.com/nvim-treesitter/nvim-treesitter",
+
+	"https://github.com/norcalli/nvim-colorizer.lua",
+	"https://github.com/mbbill/undotree",
+	{
+		src = "https://github.com/windwp/nvim-ts-autotag",
+		--ft = { "ts", "html", "css", "js" },
+	},
+}, { confirm = false })
+
+require("bufferline").setup({
+	options = {
+		mode = "buffers",
+		diagnostics = "nvim_lsp",
+		always_show_bufferline = true,
+		separator_style = "thin",
+		max_name_length = 22,
+		style_preset = require("bufferline").style_preset.no_bold,
+	},
+})
+
+require("trouble").setup({
+	focus = true,
+	open_no_results = true,
+	warn_no_results = false,
+	auto_preview = false,
+	icons = {
+		indent = {
+			middle = " ",
+			last = " ",
+			top = " ",
+			ws = "│  ",
+		},
+	},
+})
+require("ibl").setup()
+
+require("colorizer").setup()
+
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function()
+		require("nvim-treesitter").update()
+	end,
+})
+--local nts = require("nvim-treesitter")
+--nts.install()
+
+require("vimtex")
+require("autopairs")
+require("formatter")
+require("theme")
+require("finder")
+require("autocomplete")
+require("lsp")
