@@ -51,8 +51,6 @@ end)
 
 ----Perform mischalennious vim commands through remaps-------------------------
 
---delete buffer
-vim.keymap.set("n", "<leader>d", vim.cmd.bd)
 --explore
 vim.keymap.set("n", "<leader>r", vim.cmd.Ex)
 
@@ -95,4 +93,7 @@ require("theme")
 require("finder")
 require("autocomplete")
 require("lsp")
-require("ts")
+
+if vim.fn.exepath("nix") == "" then
+	require("ts")
+end
