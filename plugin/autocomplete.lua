@@ -1,7 +1,7 @@
 vim.pack.add({
 	{
 		src = "https://github.com/saghen/blink.cmp",
-		version = "v1.6.0",
+		version = vim.version.range("<2.0.0"),
 		--dependencies = "rafamadriz/friendly-snippets",
 	},
 })
@@ -9,7 +9,6 @@ vim.pack.add({
 require("blink.cmp").setup({
 	keymap = {
 		preset = "enter",
-
 		["<Tab>"] = { "select_next", "fallback" },
 		["<S-Tab>"] = { "select_prev", "fallback" },
 	},
@@ -20,7 +19,13 @@ require("blink.cmp").setup({
 
 	completion = {
 		accept = { auto_brackets = { enabled = false } },
-		documentation = { window = { border = "single" } },
+		documentation = {
+			auto_show = true,
+			auto_show_delay_ms = 200,
+			window = {
+				border = "single",
+			},
+		},
 		menu = {
 			-- nvim-cmp style menu
 			draw = {
@@ -32,5 +37,5 @@ require("blink.cmp").setup({
 		},
 	},
 
-	signature = { enabled = false, window = { border = "single" } },
+	signature = { enabled = true, window = { border = "single" } },
 })

@@ -29,6 +29,9 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 vim.opt.cursorline = true
 
+vim.g.netrw_liststyle = 1
+vim.g.netrw_sort_by = "size"
+
 ----Moving between windows and buffers-----------------------------------------
 vim.keymap.set("n", "<leader>n", vim.cmd.bprevious)
 vim.keymap.set("n", "<leader>m", vim.cmd.bnext)
@@ -79,21 +82,7 @@ vim.pack.add({
 	"https://github.com/windwp/nvim-ts-autotag",
 	"https://github.com/mbbill/undotree",
 	"https://github.com/norcalli/nvim-colorizer.lua",
-}, { confirm = false })
+})
 
 require("ibl").setup()
 require("nvim-ts-autotag").setup()
-
-require("vimtex")
-require("diagnostics")
-require("bline")
-require("autopairs")
-require("formatter")
-require("theme")
-require("finder")
-require("autocomplete")
-require("lsp")
-
-if vim.fn.exepath("nix") == "" then
-	require("ts")
-end
