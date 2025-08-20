@@ -37,5 +37,5 @@ require("blink.cmp").setup({
 		},
 	},
 
-	signature = { enabled = true, window = { border = "single" } },
+	signature = { enabled = true },
 })

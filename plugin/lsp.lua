@@ -1,10 +1,8 @@
 vim.pack.add({
 	"https://github.com/neovim/nvim-lspconfig",
 })
-
-local servers = {
-	["clangd"] = {},
-	["lua-language-server"] = {
+local configs = {
+	["lua_ls"] = {
 		settings = {
 			Lua = {
 				diagnostics = {
@@ -13,16 +11,22 @@ local servers = {
 			},
 		},
 	},
-	["vscode-html-language-server"] = {},
-	["vscode-css-language-server"] = {},
-	["vscode-json-language-server"] = {},
-	["vscode-eslint-language-server"] = {},
-	["typescript-language-server"] = {},
-	["ruff"] = {},
-	["texlab"] = {},
-	["glslls"] = {},
 	["jdtls"] = { init_options = { bundles = { os.getenv("javadebugpath") } } },
-	["nixd"] = {},
+}
+
+local servers = {
+	"clangd",
+	"lua_ls",
+	"html",
+	"cssls",
+	"jsonls",
+	"eslint",
+	"ts_ls",
+	"ruff",
+	"texlab",
+	"glslls",
+	"jdtls",
+	"nixd",
 }
 
 if vim.fn.exepath("nix") == "" then
@@ -31,37 +35,45 @@ if vim.fn.exepath("nix") == "" then
 		"https://github.com/williamboman/mason-lspconfig.nvim",
 	})
 	require("mason").setup({})
-	require("mason-lspconfig").setup({
-		ensure_installed = {
-			"clangd",
-			"lua_ls",
-			"html",
-			"cssls",
-			"jsonls",
-			"eslint",
-			"ts_ls",
-			"ruff",
-			"texlab",
-			"glslls",
-			"jdtls",
-			"nixd",
-		},
-	})
+	require("mason-lspconfig").setup({ ensure_installed = servers })
 end
 
-for server, conf in pairs(servers) do
-	vim.lsp.enable(server)
+vim.lsp.enable(servers)
+
+for server, conf in pairs(configs) do
 	vim.lsp.config(server, conf)
 end
 
 -- Diagnostic setup
 vim.diagnostic.config({
 	virtual_text = false,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.HINT] = "",
+			[vim.diagnostic.severity.INFO] = "",
+		},
+		numhl = {
+			[vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+			[vim.diagnostic.severity.HINT] = "DiagnosticHint",
+			[vim.diagnostic.severity.WARN] = "WarningMsg",
+			[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+		},
+	},
+	severity_sort = true,
 })
 
--- Remove signs and only highlight number and text
-local signs = { "Error", "Warn", "Hint", "Info" }
-for ind, value in pairs(signs) do
-	local hl = "DiagnosticSign" .. value
-	vim.fn.sign_define(hl, { text = "", linehl = "", texthl = "", numhl = hl })
-end
+vim.api.nvim_create_autocmd("DiagnosticChanged", {
+	callback = function()
+		vim.diagnostic.setqflist({ open = false })
+	end,
+})
+
+vim.keymap.set("n", "<leader>t", function()
+	if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
+		vim.cmd("cclose")
+	else
+		vim.cmd("cope")
+	end
+end)
