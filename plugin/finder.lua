@@ -4,10 +4,10 @@ vim.pack.add({
 
 local finder = require("fzf-lua")
 vim.keymap.set("n", "<leader>ff", function()
-	finder.files({ cwd = vim.fn.expand("%:p:h:h") })
+	finder.files() --{ cwd = vim.fn.expand("%:p:h:h") })
 end)
 vim.keymap.set("n", "<leader>/", function()
-	finder.live_grep({ cwd = vim.fn.expand("%:p:h:h") })
+	finder.live_grep()
 end)
 vim.keymap.set("n", "<leader>fg", function()
 	require("fzf-lua").git_files()

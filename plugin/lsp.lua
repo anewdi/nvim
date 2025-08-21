@@ -66,11 +66,22 @@ vim.diagnostic.config({
 
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
 	callback = function()
-		vim.diagnostic.setqflist({ open = false })
+		if vim.fn.getqflist({ title = 0 }).title == "Diagnotiscs" then
+			vim.diagnostic.setqflist({ open = false })
+		end
 	end,
 })
 
 vim.keymap.set("n", "<leader>t", function()
+	if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
+		vim.cmd("cclose")
+	else
+		vim.diagnostic.setqflist()
+		vim.cmd("cope")
+	end
+end)
+
+vim.keymap.set("n", "<leader>q", function()
 	if vim.fn.getqflist({ winid = 0 }).winid ~= 0 then
 		vim.cmd("cclose")
 	else

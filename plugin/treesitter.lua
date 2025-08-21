@@ -5,7 +5,7 @@ vim.pack.add({
 	},
 })
 
-require("nvim-treesitter").install({
+local ft = {
 	"bash",
 	"c",
 	"dockerfile",
@@ -37,7 +37,9 @@ require("nvim-treesitter").install({
 	"yaml",
 	"zig",
 	"nix",
-})
+}
+
+require("nvim-treesitter").install(ft)
 
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(as)
@@ -48,7 +50,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "<filetype>" },
+	pattern = ft,
 	callback = function()
 		vim.treesitter.start()
 	end,
