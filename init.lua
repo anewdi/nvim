@@ -32,6 +32,10 @@ vim.opt.cursorline = true
 vim.g.netrw_liststyle = 1
 vim.g.netrw_sort_by = "size"
 
+vim.g.syntax_on = true
+
+vim.cmd.filetype("plugin indent on")
+
 ----Moving between windows and buffers-----------------------------------------
 vim.keymap.set("n", "<leader>n", vim.cmd.bprevious)
 vim.keymap.set("n", "<leader>m", vim.cmd.bnext)

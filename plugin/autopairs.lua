@@ -12,6 +12,8 @@ require("nvim-autopairs").add_rules({
 		--Dont do double
 		:with_pair(cond.not_after_regex("\\)", 2))
 		:with_pair(cond.not_inside_quote()),
-
-	Rule("\\left", "(\\right)", { "tex", "latex" }):with_pair(cond.not_inside_quote()),
+	Rule("\\langle", "\\rangle", { "tex", "latex" })
+		--Dont do double
+		:with_pair(cond.not_after_regex("\\rangle", 2))
+		:with_pair(cond.not_inside_quote()),
 })

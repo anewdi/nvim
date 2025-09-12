@@ -66,7 +66,7 @@ vim.diagnostic.config({
 
 vim.api.nvim_create_autocmd("DiagnosticChanged", {
 	callback = function()
-		if vim.fn.getqflist({ title = 0 }).title == "Diagnotiscs" then
+		if vim.fn.getqflist({ title = 0 }).title == "Diagnostics" then
 			vim.diagnostic.setqflist({ open = false })
 		end
 	end,

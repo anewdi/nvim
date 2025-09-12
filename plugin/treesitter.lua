@@ -31,15 +31,18 @@ local ft = {
 	"sql",
 	"toml",
 	"tsx",
-	"typescript",
 	"latex",
+	"typescript",
 	"vim",
+	"xml",
 	"yaml",
 	"zig",
 	"nix",
 }
 
 require("nvim-treesitter").install(ft)
+
+require("nvim-treesitter").setup({})
 
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(as)
