@@ -27,6 +27,7 @@ local servers = {
 	"glslls",
 	"jdtls",
 	"nixd",
+	"ts_ls",
 }
 
 if vim.fn.exepath("nix") == "" then

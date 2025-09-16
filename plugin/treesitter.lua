@@ -42,8 +42,6 @@ local ft = {
 
 require("nvim-treesitter").install(ft)
 
-require("nvim-treesitter").setup({})
-
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(as)
 		if as.data.spec.name == "nvim-treesitter" then
@@ -58,3 +56,11 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.treesitter.start()
 	end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "tex" },
+	callback = function()
+		vim.treesitter.start()
+	end,
+})
+vim.treesitter.language.register("latex", { "tex" })
