@@ -18,6 +18,7 @@ local servers = {
 	"clangd",
 	"lua_ls",
 	"html",
+	"pylsp",
 	"cssls",
 	"jsonls",
 	"eslint",
@@ -28,6 +29,7 @@ local servers = {
 	"jdtls",
 	"nixd",
 	"ts_ls",
+	"rust_analyzer",
 }
 
 if vim.fn.exepath("nix") == "" then

@@ -9,8 +9,8 @@ vim.pack.add({
 require("blink.cmp").setup({
 	keymap = {
 		preset = "enter",
-		["<Tab>"] = { "select_next", "fallback" },
-		["<S-Tab>"] = { "select_prev", "fallback" },
+		["<C-j>"] = { "select_next", "fallback" },
+		["<C-k>"] = { "select_prev", "fallback" },
 	},
 
 	appearance = {
