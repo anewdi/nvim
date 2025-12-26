@@ -9,6 +9,7 @@ vim.g.vimtex_complete_enabled = 0
 vim.g.vimtex_indent_enabled = 0
 vim.opt.conceallevel = 0
 vim.g.vimtex_syntax_conceal_disable = 1
+vim.g.vimtex_syntax_enabled = 0
 vim.g.vimtex_syntax_conceal = {
 	accents = 0,
 	ligatures = 0,

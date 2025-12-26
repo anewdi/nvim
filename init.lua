@@ -33,7 +33,6 @@ vim.g.netrw_liststyle = 1
 vim.g.netrw_sort_by = "size"
 
 vim.g.syntax_on = true
-
 vim.cmd.filetype("plugin indent on")
 
 ----Moving between windows and buffers-----------------------------------------

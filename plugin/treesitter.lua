@@ -8,6 +8,7 @@ vim.pack.add({
 local ft = {
 	"bash",
 	"c",
+	"cpp",
 	"dockerfile",
 	"fish",
 	"git_config",
@@ -37,10 +38,13 @@ local ft = {
 	"xml",
 	"yaml",
 	"zig",
+	"tex",
 	"nix",
 }
 
 require("nvim-treesitter").install(ft)
+
+vim.treesitter.language.register("latex", { "tex" })
 
 vim.api.nvim_create_autocmd("PackChanged", {
 	callback = function(as)
@@ -56,11 +60,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.treesitter.start()
 	end,
 })
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "tex" },
-	callback = function()
-		vim.treesitter.start()
-	end,
-})
-vim.treesitter.language.register("latex", { "tex" })

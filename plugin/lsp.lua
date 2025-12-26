@@ -18,7 +18,7 @@ local servers = {
 	"clangd",
 	"lua_ls",
 	"html",
-	"pylsp",
+	"pyright",
 	"cssls",
 	"jsonls",
 	"eslint",
