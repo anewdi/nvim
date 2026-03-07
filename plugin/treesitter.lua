@@ -23,7 +23,6 @@ local ft = {
 	"javascript",
 	"json",
 	"java",
-	"javafx",
 	"lua",
 	"make",
 	"markdown",
@@ -38,7 +37,6 @@ local ft = {
 	"xml",
 	"yaml",
 	"zig",
-	"tex",
 	"nix",
 }
 

@@ -17,6 +17,7 @@ local configs = {
 local servers = {
 	"clangd",
 	"lua_ls",
+	"tailwindcss",
 	"html",
 	"pyright",
 	"cssls",
@@ -29,6 +30,7 @@ local servers = {
 	"jdtls",
 	"nixd",
 	"ts_ls",
+	"qmlls",
 	"rust_analyzer",
 }
 
