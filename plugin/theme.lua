@@ -24,4 +24,10 @@ elseif theme == "github" then
 		"https://github.com/projekt0n/github-nvim-theme",
 	})
 	vim.cmd.colorscheme("github_dark")
+elseif theme == "ayu" then
+	vim.pack.add({
+		"https://github.com/ayu-theme/ayu-vim",
+	})
+	vim.g.ayucolor = "light"
+	vim.cmd.colorscheme("ayu")
 end
