@@ -38,6 +38,7 @@ local ft = {
 	"yaml",
 	"zig",
 	"nix",
+	"scala",
 }
 
 require("nvim-treesitter").install(ft)

@@ -32,6 +32,7 @@ local servers = {
 	"ts_ls",
 	"qmlls",
 	"rust_analyzer",
+	"metals",
 }
 
 if vim.fn.exepath("nix") == "" then

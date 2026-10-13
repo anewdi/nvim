@@ -13,6 +13,7 @@ require("conform").setup({
 		java = { "google-java-format", stop_after_first = true },
 		tex = { lsp_format = "prefer" },
 		cpp = { lsp_format = "prefer" },
+		scala = { "scalafmt" },
 	},
 
 	format_on_save = {
